@@ -1,0 +1,15 @@
+.Navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.link {
+    margin: clamp(.33rem, .5rem + 1vw, 2rem);
+    font-size: clamp(.1rem, .75rem + 1vw, 2rem);
+    cursor: pointer;
+}
+
+.link:hover {
+    color: #0070f0;
+}
