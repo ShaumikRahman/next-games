@@ -12,7 +12,15 @@ const Navbar = () => {
             <h3>Search</h3>
         </div>
         <div className={styles.link}>
-            <h3 onClick={() => {document.getElementById('main').classList.toggle('dark')}}>Theme</h3>
+            <h3 onClick={() => {
+                document.getElementById('main').classList.toggle('dark');
+                
+                if (document.getElementById('main').classList.contains('dark')) {
+                    localStorage.setItem('dark', 'true');
+                } else {
+                    localStorage.setItem('dark', 'false');
+                }
+            }}>Theme</h3>
         </div>
     </div>
 }
