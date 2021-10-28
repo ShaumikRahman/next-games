@@ -4,17 +4,42 @@
     align-items: center;
     gap: 1rem;
     width: 50%; 
+    transition: width 150ms ease-in-out;
+
+
+    @media (max-width: 48rem) {
+        width: 90%;
+        transition: width 150ms ease-in-out;
+    }
 }
 
-.game {
+.form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     gap: 1rem;
-    text-align: center;
 }
 
-.image {
-    width: 70%;
+.query {
+    width: 18rem;
+    height: 3rem;
+    outline: none;
+    border: none;
+    border-radius: .5rem;
+    text-align: center;
+    font-size: 2rem;
+    color: #fafafa;
+    background-color: #2C2F33;
 }
+
+.submit {
+    width: 4rem;
+    height: 2rem;
+    background-color: #2C2F33;
+    outline: none;
+    border: none;
+    color: #fafafa;
+    border-radius: .5rem;
+    cursor: pointer;
+}
+
