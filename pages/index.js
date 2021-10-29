@@ -7,12 +7,14 @@ export default function Home() {
   const [query, setQuery] = useState("");
   const isInitialMount = useRef(true);
 
+  const search = (q) => `/api/search?q=${q}`
+
   const process = (e) => {
     e.preventDefault();
     let q = escape(
       e.target[0].value.replace(/\s\s+/g, " ").trim().replace(/\s/g, "+")
     );
-    console.log(q);
+    //console.log(q);
     if (q.length) {
       setQuery(q);
     } else {
@@ -24,10 +26,7 @@ export default function Home() {
     if (isInitialMount.current) {
       isInitialMount.current = false;
     } else {
-      fetch(`https://rawg.io/api/games
-      ?key=${process.env.KEY}
-      &search=${query}
-      &page_size=5`)
+      fetch(search(query))
       .then(res => res.json())
       .then(data => {console.log(data); setGames(data.results)});
     }
