@@ -11,6 +11,7 @@ export default function Home() {
 
   const process = (e) => {
     e.preventDefault();
+
     let q = escape(
       e.target[0].value.replace(/\s\s+/g, " ").trim().replace(/\s/g, "+")
     );

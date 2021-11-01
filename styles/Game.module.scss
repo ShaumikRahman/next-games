@@ -10,3 +10,12 @@
 .image {
     width: 70%;
 }
+
+.ratings {
+    display: flex;
+    width: 70%;
+
+    div {
+        height: 10px;
+    }
+}
