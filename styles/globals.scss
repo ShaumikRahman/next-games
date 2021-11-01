@@ -39,6 +39,7 @@ a {
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
+  gap: 3rem;
 
   .title {
     font-size: clamp(100%, 100% + 10vw, 1000%);

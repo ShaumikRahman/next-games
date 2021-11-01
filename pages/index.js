@@ -32,6 +32,7 @@ export default function Home() {
         .then((data) => {
           console.log(data);
           setGames(data.results);
+          // localStorage.setItem('games', JSON.stringify(data.results));
         });
     }
   }, [query]);
@@ -45,9 +46,9 @@ export default function Home() {
       </form>
       <div className={styles.games}>
         {games.length > 0 &&
-          games.map((game, index) => {
-            return <Game game={game} key={index} />;
-          })}
+            games.map((game, index) => {
+              return <Game game={game} key={index} />;
+            })}
       </div>
     </div>
   );
