@@ -1,6 +1,6 @@
 import styles from '../styles/Game.module.scss'
 
-const Game = ({ game }) => {
+const Game = ({ game, index }) => {
   return (
     <div className={styles.game} key={index}>
       <h2>{game.name}</h2>

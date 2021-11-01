@@ -7,7 +7,7 @@ export default function Home() {
   const [query, setQuery] = useState("");
   const isInitialMount = useRef(true);
 
-  const search = (q) => `/api/search?q=${q}`
+  const search = (q) => `/api/search?q=${q}`;
 
   const process = (e) => {
     e.preventDefault();
@@ -27,8 +27,11 @@ export default function Home() {
       isInitialMount.current = false;
     } else {
       fetch(search(query))
-      .then(res => res.json())
-      .then(data => {console.log(data); setGames(data.results)});
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setGames(data.results);
+        });
     }
   }, [query]);
 
@@ -40,9 +43,9 @@ export default function Home() {
         <input type="submit" value="Go" className={styles.submit} />
       </form>
       <div className={styles.games}>
-        {games &&
-          games.forEach((game, index) => {
-            return <Game data={game} key={index} />;
+        {games.length > 0 &&
+          games.map((game, index) => {
+            return <Game game={game} key={index} />;
           })}
       </div>
     </div>
