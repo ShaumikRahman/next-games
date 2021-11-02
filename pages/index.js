@@ -1,11 +1,47 @@
 import styles from "../styles/Home.module.scss";
 import { useEffect, useState, useRef } from "react";
 import Game from "../components/Game";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const [games, setGames] = useState([]);
   const [query, setQuery] = useState("");
   const isInitialMount = useRef(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (localStorage.getItem("games") === null) {
+      localStorage.setItem("games", JSON.stringify(games));
+    } else {
+      setGames(JSON.parse(localStorage.getItem("games")));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isInitialMount.current) {
+      console.log("first dodged");
+      isInitialMount.current = false;
+    } else {
+      if (query.length > 0) {
+        console.log("searching");
+        fetch(search(query))
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            setGames(data.results);
+            localStorage.setItem("games", JSON.stringify(data.results));
+          });
+      }
+    }
+  }, [query]);
+
+  useEffect(() => {
+    if (document.getElementById(`${router.asPath.slice(2)}`) !== null) {
+      document
+        .getElementById(`${router.asPath.slice(2)}`)
+        .scrollIntoView({ behavior: "smooth" });
+    }
+  }, [games]);
 
   const search = (q) => `/api/search?q=${q}`;
 
@@ -23,20 +59,6 @@ export default function Home() {
     }
   };
 
-  useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-    } else {
-      fetch(search(query))
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          setGames(data.results);
-          // localStorage.setItem('games', JSON.stringify(data.results));
-        });
-    }
-  }, [query]);
-
   return (
     <div className="container">
       <h1 className="title">Next Games</h1>
@@ -46,9 +68,9 @@ export default function Home() {
       </form>
       <div className={styles.games}>
         {games.length > 0 &&
-            games.map((game, index) => {
-              return <Game game={game} key={index} />;
-            })}
+          games.map((game, index) => {
+            return <Game game={game} key={index} />;
+          })}
       </div>
     </div>
   );

@@ -10,11 +10,11 @@ const InfoBox = ({ target, info }) => {
         {info.map((item, index) => {
 
             if (item.count) {
-                return <p>{`${item.title} : ${item.count}`}</p> //ratings
+                return <p key={index}>{`${item.title} : ${item.count}`}</p> //ratings
             } else if (item.released_at) {
-                return <p>{`${item.platform.name} : ${item.released_at}`}</p> //platforms
+                return <p key={index}>{`${item.platform.name} : ${item.released_at}`}</p> //platforms
             } else {
-                return <p>{item.name}</p>; //default
+                return <p key={index}>{item.name}</p>; //default
             }
 
         //   return <p>{item.count ? `${item.title} : ${item.count}` : item.name}</p>;
