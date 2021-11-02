@@ -1,0 +1,18 @@
+.infoBox {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.left {
+    text-align: start;
+    display: flex;
+    align-items: center;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    text-align: end;
+}

@@ -12,9 +12,24 @@
 }
 
 .image {
-    width: 70%;
+    width: 85%;
+
+    @media (min-width: 48rem) {
+        width: 66%;
+    }
 }
 
 .title {
     text-align: center;
+}
+
+.infoBoxes {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    width: 85%;
+
+    @media (min-width: 48rem) {
+        width: 66%;
+    }
 }

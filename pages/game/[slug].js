@@ -1,11 +1,19 @@
 import styles from "../../styles/SingleGame.module.scss";
 import Link from "next/link";
+import Head from "next/head";
+import InfoBox from "../../components/InfoBox";
 
 export const SingleGame = ({ game }) => {
   console.log(game);
 
+  const fields = ["developers", "publishers", "ratings", "genres", "platforms"];
+
   return (
     <div className="container">
+      <Head>
+        <title>{game.name}</title>
+        <meta name="description" content={`Information for ${game.name}`} />
+      </Head>
       <Link href={`/#${game.id}`}>
         <h1 className={styles.return}>Return</h1>
       </Link>
@@ -17,45 +25,14 @@ export const SingleGame = ({ game }) => {
           alt={game.slug}
         />
         <p className={styles.released}>Released {game.released}</p>
-        <details className={styles.developers}>
-          <summary>Developers</summary>
-          {game.developers.map((dev) => {
+
+        <div className={styles.infoBoxes}>
+          {fields.map((field, index) => {
             return (
-              <p className={styles.developer} key={dev.id}>
-                {dev.name}
-              </p>
+              <InfoBox key={index} target={field} info={game[field]}></InfoBox>
             );
           })}
-        </details>
-        <details className={styles.publishers}>
-          <summary>Publishers</summary>
-          {game.publishers.map((publisher) => {
-            return (
-              <p className={styles.publisher} key={publisher.id}>
-                {publisher.name}
-              </p>
-            );
-          })}
-        </details>
-        <details className={styles.genres}>
-          <summary>Genres</summary>
-          {game.genres.map((genre) => {
-            return (
-              <p className={styles.genre} key={genre.id}>
-                {genre.name}
-              </p>
-            );
-          })}
-        </details>
-      </div>
-      <div className={styles.rating}>
-        <h2 className={styles.title}>Rating</h2>
-        <details className={styles.ratings}>
-          <summary>Player ratings</summary>
-          {game.ratings.map(rating => {
-              return <p key={rating.id}>{rating.title} - {rating.count}</p>
-          })}
-        </details>
+        </div>
       </div>
     </div>
   );
