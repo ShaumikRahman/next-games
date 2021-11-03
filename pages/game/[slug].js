@@ -2,8 +2,10 @@ import styles from "../../styles/SingleGame.module.scss";
 import Link from "next/link";
 import Head from "next/head";
 import InfoBox from "../../components/InfoBox";
+import { useRef } from "react";
 
-export const SingleGame = ({ game }) => {
+export default function SingleGame({ game }) {
+  const desc = useRef();
   console.log(game);
 
   const fields = ["developers", "publishers", "ratings", "genres", "platforms"];
@@ -25,7 +27,20 @@ export const SingleGame = ({ game }) => {
           alt={game.slug}
         />
         <p className={styles.released}>Released {game.released}</p>
-
+        <div className={styles.descBox}>
+          <h2
+            onClick={() => {
+              desc.current.classList.toggle("fade");
+              //desc.current.classList.toggle("hide");
+            }}
+            className={styles.summary}
+          >
+            Description
+          </h2>
+          <p ref={desc} className={`${styles.desc}`}>
+            {game.description_raw}
+          </p>
+        </div>
         <div className={styles.infoBoxes}>
           {fields.map((field, index) => {
             return (
@@ -36,7 +51,7 @@ export const SingleGame = ({ game }) => {
       </div>
     </div>
   );
-};
+}
 
 export async function getServerSideProps(context) {
   const response = await fetch(
@@ -51,5 +66,3 @@ export async function getServerSideProps(context) {
     },
   };
 }
-
-export default SingleGame;
