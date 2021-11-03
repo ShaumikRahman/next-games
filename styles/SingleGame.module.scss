@@ -2,6 +2,13 @@
 .return {
     margin-top: 3rem;
     color: #0070f0;
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
+}
+
+.return:hover {
+    transform: scale(1.05);
+    transition: all 100ms ease-in-out;
 }
 
 .game, .rating {

@@ -5,6 +5,14 @@
     align-items: center;
     gap: 1rem;
     text-align: center;
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
+}
+
+.game:hover {
+    color: #0070f0;
+    transform: scale(1.05);
+    transition: all 100ms ease-in-out;
 }
 
 .image {
