@@ -1,5 +1,6 @@
 import "../styles/globals.scss";
 import Navbar from "../components/Navbar";
+import Jump from "../components/Jump";
 import { useEffect, useRef} from 'react'
 
 function MyApp({ Component, pageProps }) {
@@ -22,6 +23,7 @@ function MyApp({ Component, pageProps }) {
     <div id="main" ref={main}>
       <Navbar />
       <Component {...pageProps} />
+      <Jump />
     </div>
   );
 }
