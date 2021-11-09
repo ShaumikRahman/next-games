@@ -1,11 +1,11 @@
-.return {
+.return, .screenshots {
   margin-top: 3rem;
   color: #0070f0;
   cursor: pointer;
   transition: all 150ms ease-in-out;
 }
 
-.return:hover, .summary:hover {
+.return:hover, .summary:hover, .screenshots:hover {
   transform: scale(1.05);
   transition: all 100ms ease-in-out;
 }
@@ -69,4 +69,8 @@
   @media (min-width: 48rem) {
     width: 66%;
   }
+}
+
+.screenshots {
+  margin-bottom: 3rem;
 }

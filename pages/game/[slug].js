@@ -48,6 +48,9 @@ export default function SingleGame({ game }) {
             );
           })}
         </div>
+        <Link href={`/screenshots/${game.slug}`}>
+          <h1 className={styles.screenshots}>Screenshots</h1>
+        </Link>
       </div>
     </div>
   );
