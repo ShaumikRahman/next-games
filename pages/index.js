@@ -69,7 +69,7 @@ export default function Home() {
       <div className={styles.games}>
         {games.length > 0 &&
           games.map((game, index) => {
-            return <Game game={game} key={index} />;
+            return <Game game={game} key={index} location={'Home'} />;
           })}
       </div>
     </div>

@@ -1,28 +1,36 @@
-import styles from '../styles/Navbar.module.scss'
+import styles from "../styles/Navbar.module.scss";
+import Link from "next/link";
 
 const Navbar = () => {
-    return <div className={styles.Navbar}>
-        <div className={styles.link}>
-            <h3>Home</h3>
-        </div>
-        <div className={styles.link}>
-            <h3>Popular</h3>
-        </div>
-        <div className={styles.link}>
-            <h3>Search</h3>
-        </div>
-        <div className={styles.link}>
-            <h3 onClick={() => {
-                document.getElementById('main').classList.toggle('dark');
-                
-                if (document.getElementById('main').classList.contains('dark')) {
-                    localStorage.setItem('dark', 'true');
-                } else {
-                    localStorage.setItem('dark', 'false');
-                }
-            }}>Theme</h3>
-        </div>
-    </div>
-}
+  return (
+    <div className={styles.Navbar}>
+      <div className={styles.link}>
+        <Link href={"/"}>
+          <h3>Home</h3>
+        </Link>
+      </div>
+      <div className={styles.link}>
+        <Link href={"/browse"}>
+            <h3>Browse</h3>
+        </Link>
+      </div>
+      <div className={styles.link}>
+        <h3
+          onClick={() => {
+            document.getElementById("main").classList.toggle("dark");
 
-export default Navbar
+            if (document.getElementById("main").classList.contains("dark")) {
+              localStorage.setItem("dark", "true");
+            } else {
+              localStorage.setItem("dark", "false");
+            }
+          }}
+        >
+          Theme
+        </h3>
+      </div>
+    </div>
+  );
+};
+
+export default Navbar;

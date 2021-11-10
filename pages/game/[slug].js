@@ -3,10 +3,14 @@ import Link from "next/link";
 import Head from "next/head";
 import InfoBox from "../../components/InfoBox";
 import { useRef } from "react";
+import { useRouter } from "next/router";
 
 export default function SingleGame({ game }) {
   const desc = useRef();
+  const router = useRouter();
   console.log(game);
+
+  const from = router.query.from;
 
   const fields = ["developers", "publishers", "ratings", "genres", "platforms"];
 
@@ -16,7 +20,7 @@ export default function SingleGame({ game }) {
         <title>{game.name}</title>
         <meta name="description" content={`Information for ${game.name}`} />
       </Head>
-      <Link href={`/#${game.id}`}>
+      <Link href={from === 'Home' ? `/#${game.id}` : `/browse#${game.id}`}>
         <h1 className={styles.return}>Return</h1>
       </Link>
       <div className={styles.game}>

@@ -1,9 +1,10 @@
 import styles from "../styles/Game.module.scss";
 import Link from 'next/link'
 
-const Game = ({ game, index }) => {
+const Game = ({ game, index, location }) => {
+
   return (
-    <Link href={`/game/${game.slug}`}>
+    <Link href={`/game/${game.slug}?from=${location}`}>
       <div className={styles.game} key={index} id={game.id}>
         <h2>{game.name}</h2>
         <img
