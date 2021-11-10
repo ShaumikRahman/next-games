@@ -1,13 +1,36 @@
-import styles from "../styles/Home.module.scss";
+import styles from "../styles/Browse.module.scss";
 import { useEffect, useState, useRef } from "react";
 import Game from "../components/Game";
-import Empty from "../components/Empty"
+import Empty from "../components/Empty";
 import { useRouter } from "next/router";
 
 export default function Browse() {
   const [games, setGames] = useState([]);
   //const isInitialMount = useRef(true);
   const router = useRouter();
+
+  const plats = [
+    {
+      id: 1,
+      name: "PC",
+      slug: "pc",
+    },
+    {
+      id: 2,
+      name: "PlayStation",
+      slug: "playstation",
+    },
+    {
+      id: 3,
+      name: "Xbox",
+      slug: "xbox",
+    },
+    {
+      id: 7,
+      name: "Nintendo",
+      slug: "nintendo",
+    },
+  ];
 
   useEffect(() => {
     if (localStorage.getItem("browse") === null) {
@@ -40,18 +63,41 @@ export default function Browse() {
   const process = (e) => {
     e.preventDefault();
 
-    let query = escape(
+    let query = '';
+
+    let q = escape(
       e.target[0].value.replace(/\s\s+/g, " ").trim().replace(/\s/g, "+")
     );
-    //console.log(q);
+
+    if (q.length) {
+      query += q;
+    }
+
+    let platforms = '';
+
+    for (let i = 1; i < e.target.length - 1; i++) {
+      if (e.target[i].checked) {
+        platforms += `${e.target[i].id},`;
+      }
+    }
+
+    if (platforms.length) {
+      query += `&parent_platforms=${platforms.slice(0, -1)}`;
+    }
+
+    // console.log(query);
 
     console.log("searching");
     fetch(browse(query))
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        setGames(data.results);
-        localStorage.setItem("browse", JSON.stringify(data.results));
+        if (data) {
+          console.log(data);
+          setGames(data.results);
+          localStorage.setItem("browse", JSON.stringify(data.results));
+        } else {
+          console.log("no data");
+        }
       });
   };
 
@@ -62,17 +108,33 @@ export default function Browse() {
         <div className="search">
           <input type="text" className={styles.query} placeholder="Search" />
         </div>
-        <div className="filters">
-          <label htmlFor="ps">PlayStation</label>
-          <input type="checkbox" name="1" id="ps" />
+        <div className={styles.filters}>
+          {plats.map((platform) => {
+            return (
+              <div
+                className={styles.platform}
+                key={platform.id}
+                onClick={() => {
+                  document.getElementById(`${platform.id}`).checked =
+                    !document.getElementById(`${platform.id}`).checked;
+                }}
+              >
+                <label htmlFor={platform.id}>{platform.name}</label>
+                <input type="checkbox" name={platform.name} id={platform.id} />
+              </div>
+            );
+          })}
         </div>
         <input type="submit" value="Go" className={styles.submit} />
       </form>
       <div className={styles.games}>
-        {games.length > 0 ?
+        {games.length > 0 ? (
           games.map((game, index) => {
-            return <Game game={game} key={index} location={'Browse'} />;
-          }) : <Empty />}
+            return <Game game={game} key={index} location={"Browse"} />;
+          })
+        ) : (
+          <Empty />
+        )}
       </div>
     </div>
   );

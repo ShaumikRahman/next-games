@@ -1,4 +1,5 @@
 export default function handler(req, res) {
+  console.log(req);
 
   let fetchString = `https://rawg.io/api/games?key=${process.env.KEY}`;
 
@@ -6,7 +7,13 @@ export default function handler(req, res) {
     fetchString += `&search=${req.query.q}`;
   }
 
-  fetchString += '&page_size=15&platforms=1';
+  if (req.query.parent_platforms) {
+    fetchString += `&parent_platforms=${req.query.parent_platforms}`;
+  }
+
+  fetchString += '&page_size=15';
+
+  console.log(fetchString);
 
   fetch(fetchString)
       .then((response) => response.json())
