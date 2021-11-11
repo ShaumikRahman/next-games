@@ -68,10 +68,10 @@ a {
   transform: scale(0);
 }
 
-p.fade {
+p.fade, #platforms.fade {
   opacity: 1;
   max-height: 100rem; 
   transition-property: opacity, max-height;
-  transition-duration: 200ms;
+  transition-duration: 250ms;
   transition-timing-function: ease-in-out;
 }

@@ -8,6 +8,7 @@ export default function Browse() {
   const [games, setGames] = useState([]);
   //const isInitialMount = useRef(true);
   const router = useRouter();
+  const platforms = useRef();
 
   const plats = [
     {
@@ -63,7 +64,7 @@ export default function Browse() {
   const process = (e) => {
     e.preventDefault();
 
-    let query = '';
+    let query = "";
 
     let q = escape(
       e.target[0].value.replace(/\s\s+/g, " ").trim().replace(/\s/g, "+")
@@ -73,7 +74,7 @@ export default function Browse() {
       query += q;
     }
 
-    let platforms = '';
+    let platforms = "";
 
     for (let i = 1; i < e.target.length - 1; i++) {
       if (e.target[i].checked) {
@@ -109,21 +110,29 @@ export default function Browse() {
           <input type="text" className={styles.query} placeholder="Search" />
         </div>
         <div className={styles.filters}>
-          {plats.map((platform) => {
-            return (
-              <div
-                className={styles.platform}
-                key={platform.id}
-                onClick={() => {
-                  document.getElementById(`${platform.id}`).checked =
-                    !document.getElementById(`${platform.id}`).checked;
-                }}
-              >
-                <label htmlFor={platform.id}>{platform.name}</label>
-                <input type="checkbox" name={platform.name} id={platform.id} />
-              </div>
-            );
-          })}
+          <h2
+            onClick={() => {
+              platforms.current.classList.toggle("fade");
+              //desc.current.classList.toggle("hide");
+            }}
+            className={styles.summary}
+          >
+            Filters
+          </h2>
+          <div className={styles.platforms} ref={platforms} id="platforms">
+            {plats.map((platform) => {
+              return (
+                <div className={styles.platform} key={platform.id}>
+                  <label className={styles.label} htmlFor={platform.id}>{platform.name}</label>
+                  <input
+                    type="checkbox"
+                    name={platform.name}
+                    id={platform.id}
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
         <input type="submit" value="Go" className={styles.submit} />
       </form>

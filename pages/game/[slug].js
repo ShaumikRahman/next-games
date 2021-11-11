@@ -24,7 +24,7 @@ export default function SingleGame({ game }) {
         <h1 className={styles.return}>Return</h1>
       </Link>
       <div className={styles.game}>
-        <h1 className={styles.title}>{game.name}</h1>
+        <h1 className={styles.title}>{game.name}</h1> 
         <img
           className={styles.image}
           src={game.background_image}
