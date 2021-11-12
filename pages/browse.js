@@ -9,6 +9,8 @@ export default function Browse() {
   //const isInitialMount = useRef(true);
   const router = useRouter();
   const platforms = useRef();
+  const genres = useRef();
+  const filters = useRef();
 
   const plats = [
     {
@@ -30,6 +32,89 @@ export default function Browse() {
       id: 7,
       name: "Nintendo",
       slug: "nintendo",
+    },
+  ];
+
+  const genresArray = [
+    {
+      id: 4,
+      name: "Action",
+      slug: "action",
+    },
+    {
+      id: 51,
+      name: "Indie",
+      slug: "indie",
+    },
+    {
+      id: 3,
+      name: "Adventure",
+      slug: "adventure",
+    },
+    {
+      id: 5,
+      name: "RPG",
+      slug: "role-playing-games-rpg",
+    },
+    {
+      id: 10,
+      name: "Strategy",
+      slug: "strategy",
+    },
+    {
+      id: 2,
+      name: "Shooter",
+      slug: "shooter",
+    },
+    {
+      id: 40,
+      name: "Casual",
+      slug: "casual",
+    },
+    {
+      id: 14,
+      name: "Simulation",
+      slug: "simulation",
+    },
+    {
+      id: 7,
+      name: "Puzzle",
+      slug: "puzzle",
+    },
+    {
+      id: 11,
+      name: "Arcade",
+      slug: "arcade",
+    },
+    {
+      id: 83,
+      name: "Platformer",
+      slug: "platformer",
+    },
+    {
+      id: 1,
+      name: "Racing",
+      slug: "racing",
+    },
+    {
+      id: 59,
+      name: "Massively Multiplayer",
+      slug: "massively-multiplayer",
+    },
+    {
+      id: 15,
+      name: "Sports",
+      slug: "sports",
+    },
+    {
+      id: 6,
+      name: "Fighting",
+      slug: "fighting",
+    },
+    {
+      id: 17,
+      name: "Card",
+      slug: "card",
     },
   ];
 
@@ -109,32 +194,64 @@ export default function Browse() {
         <div className="search">
           <input type="text" className={styles.query} placeholder="Search" />
         </div>
-        <div className={styles.filters}>
-          <h2
+        <h2
+          onClick={() => {
+            filters.current.classList.toggle("fade");
+          }}
+          className={styles.clickTitle}
+        >
+          Filters
+        </h2>
+        <div className={styles.filters} ref={filters} id="filters">
+          <h3
+            className={styles.clickTitle}
             onClick={() => {
               platforms.current.classList.toggle("fade");
-              //desc.current.classList.toggle("hide");
             }}
-            className={styles.summary}
           >
-            Filters
-          </h2>
+            Platforms
+          </h3>
+
           <div className={styles.platforms} ref={platforms} id="platforms">
             {plats.map((platform) => {
               return (
                 <div className={styles.platform} key={platform.id}>
-                  <label className={styles.label} htmlFor={platform.id}>{platform.name}</label>
+                  <label className={styles.label} htmlFor={platform.slug}>
+                    {platform.name}
+                  </label>
                   <input
                     type="checkbox"
                     name={platform.name}
-                    id={platform.id}
+                    id={platform.slug}
                   />
                 </div>
               );
             })}
           </div>
+          <h3
+            className={styles.clickTitle}
+            onClick={() => {
+              genres.current.classList.toggle("fade");
+            }}
+          >
+            Genres
+          </h3>
+          <div className={styles.genres} ref={genres} id="genres">
+            {genresArray.map((genre) => {
+              return (
+                <div className={styles.genre} key={genre.id}>
+                  <label className={styles.label} htmlFor={genre.slug}>
+                    {genre.name}
+                  </label>
+                  <input type="checkbox" name={genre.name} id={genre.slug} />
+                </div>
+              );
+            })}
+          </div>
         </div>
-        <input type="submit" value="Go" className={styles.submit} />
+        <div>
+          <input type="submit" value="Go" className={styles.submit} />
+        </div>
       </form>
       <div className={styles.games}>
         {games.length > 0 ? (

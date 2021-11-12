@@ -36,31 +36,36 @@
   flex-direction: column;
   gap: 1rem;
   align-items: center;
-}
-
-.summary {
-  text-align: center;
-  color: #0070f0;
-  cursor: pointer;
-  transition: all 150ms ease-in-out;
-}
-
-.platforms {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-opacity: 0;
+  opacity: 0;
   max-height: 0px;
   transition-property: opacity, max-height;
   transition-duration: 250ms;
   transition-timing-function: ease-in-out;
 }
 
-.platform {
+.clickTitle {
+  text-align: center;
+  color: #0070f0;
+  cursor: pointer;
+  transition: all 150ms ease-in-out;
+  z-index: 9999;
+}
+
+.platforms, .genres {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    opacity: 0;
+  max-height: 0px;
+  transition-property: opacity, max-height;
+  transition-duration: 250ms;
+  transition-timing-function: ease-in-out;
+}
+
+.platform, .genre {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  cursor: pointer;
   gap: 1rem;
   
 

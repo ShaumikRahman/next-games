@@ -68,7 +68,7 @@ a {
   transform: scale(0);
 }
 
-p.fade, #platforms.fade {
+p.fade, #filters.fade, #platforms.fade, #genres.fade {
   opacity: 1;
   max-height: 100rem; 
   transition-property: opacity, max-height;
