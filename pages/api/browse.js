@@ -11,6 +11,10 @@ export default function handler(req, res) {
     fetchString += `&parent_platforms=${req.query.parent_platforms}`;
   }
 
+  if (req.query.genres) {
+    fetchString += `&genres=${req.query.genres}`;
+  }
+
   fetchString += '&page_size=15';
 
   console.log(fetchString);

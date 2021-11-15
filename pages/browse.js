@@ -149,6 +149,9 @@ export default function Browse() {
   const process = (e) => {
     e.preventDefault();
 
+
+    console.log(e);
+
     let query = "";
 
     let q = escape(
@@ -161,9 +164,9 @@ export default function Browse() {
 
     let platforms = "";
 
-    for (let i = 1; i < e.target.length - 1; i++) {
+    for (let i = 1; i < 1 + plats.length; i++) {
       if (e.target[i].checked) {
-        platforms += `${e.target[i].id},`;
+        platforms += `${e.target[i].dataset.platformid},`;
       }
     }
 
@@ -171,7 +174,19 @@ export default function Browse() {
       query += `&parent_platforms=${platforms.slice(0, -1)}`;
     }
 
-    // console.log(query);
+    let genresString = "";
+
+    for (let i = 1 + plats.length; i < 1 + plats.length + genresArray.length; i++) {
+      if (e.target[i].checked) {
+        genresString += `${e.target[i].dataset.genreid},`;
+      }
+    }
+
+    if (genresString.length) {
+      query += `&genres=${genresString.slice(0, -1)}`;
+    }
+
+    //console.log(genresString);
 
     console.log("searching");
     fetch(browse(query))
@@ -223,6 +238,7 @@ export default function Browse() {
                     type="checkbox"
                     name={platform.name}
                     id={platform.slug}
+                    data-platformid={platform.id}
                   />
                 </div>
               );
@@ -243,13 +259,13 @@ export default function Browse() {
                   <label className={styles.label} htmlFor={genre.slug}>
                     {genre.name}
                   </label>
-                  <input type="checkbox" name={genre.name} id={genre.slug} />
+                  <input type="checkbox" name={genre.name} id={genre.slug} data-genreid={genre.id} />
                 </div>
               );
             })}
           </div>
         </div>
-        <div>
+        <div className={styles.submitBox}>
           <input type="submit" value="Go" className={styles.submit} />
         </div>
       </form>
