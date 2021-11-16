@@ -2,14 +2,13 @@ import styles from "../styles/Browse.module.scss";
 import { useEffect, useState, useRef } from "react";
 import Game from "../components/Game";
 import Empty from "../components/Empty";
+import FilterBox from "../components/FilterBox";
 import { useRouter } from "next/router";
 
 export default function Browse() {
   const [games, setGames] = useState([]);
   //const isInitialMount = useRef(true);
   const router = useRouter();
-  const platforms = useRef();
-  const genres = useRef();
   const filters = useRef();
 
   const plats = [
@@ -149,7 +148,6 @@ export default function Browse() {
   const process = (e) => {
     e.preventDefault();
 
-
     console.log(e);
 
     let query = "";
@@ -166,7 +164,7 @@ export default function Browse() {
 
     for (let i = 1; i < 1 + plats.length; i++) {
       if (e.target[i].checked) {
-        platforms += `${e.target[i].dataset.platformid},`;
+        platforms += `${e.target[i].dataset.infoid},`;
       }
     }
 
@@ -176,9 +174,13 @@ export default function Browse() {
 
     let genresString = "";
 
-    for (let i = 1 + plats.length; i < 1 + plats.length + genresArray.length; i++) {
+    for (
+      let i = 1 + plats.length;
+      i < 1 + plats.length + genresArray.length;
+      i++
+    ) {
       if (e.target[i].checked) {
-        genresString += `${e.target[i].dataset.genreid},`;
+        genresString += `${e.target[i].dataset.infoid},`;
       }
     }
 
@@ -217,53 +219,9 @@ export default function Browse() {
         >
           Filters
         </h2>
-        <div className={styles.filters} ref={filters} id="filters">
-          <h3
-            className={styles.clickTitle}
-            onClick={() => {
-              platforms.current.classList.toggle("fade");
-            }}
-          >
-            Platforms
-          </h3>
-
-          <div className={styles.platforms} ref={platforms} id="platforms">
-            {plats.map((platform) => {
-              return (
-                <div className={styles.platform} key={platform.id}>
-                  <label className={styles.label} htmlFor={platform.slug}>
-                    {platform.name}
-                  </label>
-                  <input
-                    type="checkbox"
-                    name={platform.name}
-                    id={platform.slug}
-                    data-platformid={platform.id}
-                  />
-                </div>
-              );
-            })}
-          </div>
-          <h3
-            className={styles.clickTitle}
-            onClick={() => {
-              genres.current.classList.toggle("fade");
-            }}
-          >
-            Genres
-          </h3>
-          <div className={styles.genres} ref={genres} id="genres">
-            {genresArray.map((genre) => {
-              return (
-                <div className={styles.genre} key={genre.id}>
-                  <label className={styles.label} htmlFor={genre.slug}>
-                    {genre.name}
-                  </label>
-                  <input type="checkbox" name={genre.name} id={genre.slug} data-genreid={genre.id} />
-                </div>
-              );
-            })}
-          </div>
+        <div className={styles.filters} id="filters">
+          <FilterBox title='platforms' data={plats} />
+          <FilterBox title='genres' data={genresArray} />
         </div>
         <div className={styles.submitBox}>
           <input type="submit" value="Go" className={styles.submit} />
@@ -281,3 +239,60 @@ export default function Browse() {
     </div>
   );
 }
+
+
+// <div className={styles.filter}>
+//             <h3
+//               className={styles.clickTitle}
+//               onClick={() => {
+//                 platforms.current.classList.toggle("fade");
+//               }}
+//             >
+//               Platforms
+//             </h3>
+
+//             <div className={styles.platforms} ref={platforms} id="platforms">
+//               {plats.map((platform) => {
+//                 return (
+//                   <div className={styles.platform} key={platform.id}>
+//                     <label className={styles.label} htmlFor={platform.slug}>
+//                       {platform.name}
+//                     </label>
+//                     <input
+//                       type="checkbox"
+//                       name={platform.name}
+//                       id={platform.slug}
+//                       data-platformid={platform.id}
+//                     />
+//                   </div>
+//                 );
+//               })}
+//             </div>
+//           </div>
+//           <div className={styles.filter}>
+//             <h3
+//               className={styles.clickTitle}
+//               onClick={() => {
+//                 genres.current.classList.toggle("fade");
+//               }}
+//             >
+//               Genres
+//             </h3>
+//             <div className={styles.genres} ref={genres} id="genres">
+//               {genresArray.map((genre) => {
+//                 return (
+//                   <div className={styles.genre} key={genre.id}>
+//                     <label className={styles.label} htmlFor={genre.slug}>
+//                       {genre.name}
+//                     </label>
+//                     <input
+//                       type="checkbox"
+//                       name={genre.name}
+//                       id={genre.slug}
+//                       data-genreid={genre.id}
+//                     />
+//                   </div>
+//                 );
+//               })}
+//             </div>
+//           </div>
