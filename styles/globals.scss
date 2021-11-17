@@ -68,10 +68,22 @@ a {
   transform: scale(0);
 }
 
-p.fade, #filters.fade, #platforms.fade, #genres.fade {
+#filters.fade, #platforms.fade, #genres.fade {
   opacity: 1;
-  max-height: 100rem; 
+  max-height: 60vh; 
   transition-property: opacity, max-height;
   transition-duration: 250ms;
   transition-timing-function: ease-in-out;
+}
+
+// p.fade {
+//   opacity: 1;
+//   max-height: 500vh; 
+//   transition-property: opacity, max-height;
+//   transition-duration: 250ms;
+//   transition-timing-function: ease-in-out;
+// }
+
+.top {
+  z-index: 9999;
 }

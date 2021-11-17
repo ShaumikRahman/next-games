@@ -1,0 +1,19 @@
+.footer {
+    color: inherit;
+    background-color: inherit;
+    padding: 5rem 0rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.link {
+    color: #0070f0;
+}
+
+.link:hover {
+    text-decoration: underline;
+}

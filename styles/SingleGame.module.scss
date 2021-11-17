@@ -45,20 +45,23 @@
   transition: all 150ms ease-in-out;
 }
 
-.desc {
-    line-height: 2rem;
-  opacity: 0;
-  max-height: 0px;
-  text-align: center;
-  transition-property: opacity, max-height;
-  transition-duration: 250ms;
-  transition-timing-function: ease-in-out;
-  width: 85%;
+// .desc {
+//     line-height: 2rem;
+//   opacity: 0;
+//   max-height: 0px;
+//   text-align: center;
+//   transition-property: opacity, max-height;
+//   transition-duration: 250ms;
+//   transition-timing-function: ease-in-out;
+//   width: 85%;
+//   padding: 1%;
+//   border: 1px solid red;
+//   font-size: clamp(1rem, 1rem + 1vw, 2rem);
 
-  @media (min-width: 48rem) {
-    width: 66%;
-  }
-}
+//   @media (min-width: 48rem) {
+//     width: 66%;
+//   }
+// }
 
 .infoBoxes {
   display: flex;

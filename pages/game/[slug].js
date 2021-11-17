@@ -31,7 +31,7 @@ export default function SingleGame({ game }) {
           alt={game.slug}
         />
         <p className={styles.released}>Released {game.released}</p>
-        <div className={styles.descBox}>
+        {/* <div className={styles.descBox}>
           <h2
             onClick={() => {
               desc.current.classList.toggle("fade");
@@ -44,7 +44,7 @@ export default function SingleGame({ game }) {
           <p ref={desc} className={`${styles.desc}`}>
             {game.description_raw}
           </p>
-        </div>
+        </div> */}
         <div className={styles.infoBoxes}>
           {fields.map((field, index) => {
             return (
