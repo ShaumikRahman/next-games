@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import Game from "../components/Game";
 import Empty from "../components/Empty";
 import FilterBox from "../components/FilterBox";
+import DoubleButtons from "../components/DoubleButtons";
 import { useRouter } from "next/router";
 
 export default function Browse() {
@@ -219,13 +220,11 @@ export default function Browse() {
         >
           Filters
         </h2>
-        <div className={styles.filters} id="filters">
+        <div className={styles.filters} ref={filters} id="filters">
           <FilterBox title='platforms' data={plats} />
           <FilterBox title='genres' data={genresArray} />
         </div>
-        <div className={styles.submitBox}>
-          <input type="submit" value="Go" className={styles.submit} />
-        </div>
+        <DoubleButtons />
       </form>
       <div className={styles.games}>
         {games.length > 0 ? (

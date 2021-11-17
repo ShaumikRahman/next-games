@@ -1,0 +1,30 @@
+.clearBox {
+    z-index: 9999;
+  }
+  
+  .clear {
+    width: 4rem;
+    height: 2rem;
+    background-color: #ff4848;
+    outline: none;
+    border: none;
+    color: #fafafa;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .submitBox {
+    z-index: 9999;
+  }
+  
+  .submit {
+    width: 4rem;
+    height: 2rem;
+    background-color: #2c2f33;
+    outline: none;
+    border: none;
+    color: #fafafa;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+  

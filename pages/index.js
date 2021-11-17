@@ -1,6 +1,7 @@
 import styles from "../styles/Home.module.scss";
 import { useEffect, useState, useRef } from "react";
 import Game from "../components/Game";
+import DoubleButtons from "../components/DoubleButtons"
 import { useRouter } from "next/router";
 
 export default function Home() {
@@ -64,7 +65,7 @@ export default function Home() {
       <h1 className="title">Next Games</h1>
       <form className={styles.form} onSubmit={(e) => process(e)}>
         <input type="text" className={styles.query} placeholder="Search" />
-        <input type="submit" value="Go" className={styles.submit} />
+        <DoubleButtons />
       </form>
       <div className={styles.games}>
         {games.length > 0 &&
