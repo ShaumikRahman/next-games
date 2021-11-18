@@ -2,7 +2,9 @@ import styles from "../styles/Home.module.scss";
 import { useEffect, useState, useRef } from "react";
 import Game from "../components/Game";
 import DoubleButtons from "../components/DoubleButtons"
+import Empty from "../components/Empty";
 import { useRouter } from "next/router";
+import Head from 'next/head'
 
 export default function Home() {
   const [games, setGames] = useState([]);
@@ -62,16 +64,25 @@ export default function Home() {
 
   return (
     <div className="container">
+      <Head>
+        <title>
+          Next Games
+        </title>
+        <meta name="description" content="Search for games" />
+      </Head>
       <h1 className="title">Next Games</h1>
       <form className={styles.form} onSubmit={(e) => process(e)}>
         <input type="text" className={styles.query} placeholder="Search" />
         <DoubleButtons />
       </form>
       <div className={styles.games}>
-        {games.length > 0 &&
+        {games.length > 0 ? (
           games.map((game, index) => {
-            return <Game game={game} key={index} location={'Home'} />;
-          })}
+            return <Game game={game} key={index} location={"Home"} />;
+          })
+        ) : (
+          <Empty />
+        )}
       </div>
     </div>
   );

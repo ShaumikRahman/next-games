@@ -15,7 +15,7 @@ export default function handler(req, res) {
     fetchString += `&genres=${req.query.genres}`;
   }
 
-  fetchString += '&page_size=15';
+  fetchString += '&page_size=15&ordering=-metacritic&search_exact=true';
 
   console.log(fetchString);
 

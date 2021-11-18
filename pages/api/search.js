@@ -3,7 +3,7 @@ export default function handler(req, res) {
     res.end();
   } else {
     fetch(
-      `https://rawg.io/api/games?key=${process.env.KEY}&search=${req.query.q}&page_size=10`
+      `https://rawg.io/api/games?key=${process.env.KEY}&search=${req.query.q}&page_size=10&ordering=-metacritic&search_exact=true`
     )
       .then((response) => response.json())
       .then((data) => {

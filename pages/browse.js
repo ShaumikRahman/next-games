@@ -5,6 +5,7 @@ import Empty from "../components/Empty";
 import FilterBox from "../components/FilterBox";
 import DoubleButtons from "../components/DoubleButtons";
 import { useRouter } from "next/router";
+import Head from 'next/head';
 
 export default function Browse() {
   const [games, setGames] = useState([]);
@@ -207,6 +208,12 @@ export default function Browse() {
 
   return (
     <div className="container">
+      <Head>
+        <title>
+          Browse
+        </title>
+        <meta name="description" content="Browse games using filters" />
+      </Head>
       <h1 className="title">Browse</h1>
       <form className={styles.form} onSubmit={(e) => process(e)}>
         <div className="search">
@@ -224,7 +231,9 @@ export default function Browse() {
           <FilterBox title='platforms' data={plats} />
           <FilterBox title='genres' data={genresArray} />
         </div>
-        <DoubleButtons />
+        <div className="top">
+          <DoubleButtons />
+        </div>
       </form>
       <div className={styles.games}>
         {games.length > 0 ? (
@@ -234,7 +243,7 @@ export default function Browse() {
         ) : (
           <Empty />
         )}
-      </div>
+      </div> 
     </div>
   );
 }
