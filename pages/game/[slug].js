@@ -20,31 +20,41 @@ export default function SingleGame({ game }) {
         <title>{game.name}</title>
         <meta name="description" content={`Information for ${game.name}`} />
       </Head>
-      <Link href={from === 'Home' ? `/#${game.id}` : `/browse#${game.id}`}>
+      <Link href={from === "Home" ? `/#${game.id}` : `/browse#${game.id}`}>
         <h1 className={styles.return}>Return</h1>
       </Link>
       <div className={styles.game}>
-        <h1 className={styles.title}>{game.name}</h1> 
+        <h1 className={styles.title}>{game.name}</h1>
         <img
           className={styles.image}
           src={game.background_image}
           alt={game.slug}
         />
         <p className={styles.released}>Released {game.released}</p>
-        {/* <div className={styles.descBox}>
-          <h2
-            onClick={() => {
-              desc.current.classList.toggle("fade");
-              //desc.current.classList.toggle("hide");
-            }}
-            className={styles.summary}
-          >
-            Description
-          </h2>
-          <p ref={desc} className={`${styles.desc}`}>
-            {game.description_raw}
-          </p>
-        </div> */}
+        <div className={styles.description}>
+          <h1 className={styles.openModal} id="openModal" onClick={() => {
+            document.getElementsByTagName('body')[0].classList.add('scrollLock');
+          }}>
+            <a href="#modal">Description</a>
+          </h1>
+          <div className={styles.modal} id="modal">
+            <div className={styles.modalContainer}>
+              <div className={styles.close}>
+                <h1 className={styles.modalClose} onClick={() => {
+                  document.getElementsByTagName('body')[0].classList.remove('scrollLock');
+                }}>
+                  <a href="#openModal">Close</a>
+                </h1>
+              </div>
+              <div className={styles.content}>
+                <p>
+                  {game.description_raw}
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </div>
         <div className={styles.infoBoxes}>
           {fields.map((field, index) => {
             return (

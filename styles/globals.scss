@@ -10,6 +10,11 @@ body {
     }
 }
 
+.scrollLock {
+  height: 100%;
+  overflow-y: hidden;
+}
+
 a {
   color: inherit;
   text-decoration: none;
