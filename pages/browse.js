@@ -5,7 +5,7 @@ import Empty from "../components/Empty";
 import FilterBox from "../components/FilterBox";
 import DoubleButtons from "../components/DoubleButtons";
 import { useRouter } from "next/router";
-import Head from 'next/head';
+import Head from "next/head";
 
 export default function Browse() {
   const [games, setGames] = useState([]);
@@ -119,6 +119,209 @@ export default function Browse() {
     },
   ];
 
+  const tags = [
+    {
+      id: 31,
+      name: "Singleplayer",
+      slug: "singleplayer",
+    },
+    {
+      id: 40847,
+      name: "Steam Achievements",
+      slug: "steam-achievements",
+    },
+    {
+      id: 7,
+      name: "Multiplayer",
+      slug: "multiplayer",
+    },
+    {
+      id: 7808,
+      name: "steam-trading-cards",
+      slug: "steam-trading-cards",
+    },
+    {
+      id: 13,
+      name: "Atmospheric",
+      slug: "atmospheric",
+    },
+    {
+      id: 40849,
+      name: "Steam Cloud",
+      slug: "steam-cloud",
+    },
+    {
+      id: 40836,
+      name: "Full controller support",
+      slug: "full-controller-support",
+    },
+    {
+      id: 42,
+      name: "Great Soundtrack",
+      slug: "great-soundtrack",
+    },
+    {
+      id: 24,
+      name: "RPG",
+      slug: "rpg",
+    },
+    {
+      id: 18,
+      name: "Co-op",
+      slug: "co-op",
+    },
+    {
+      id: 118,
+      name: "Story Rich",
+      slug: "story-rich",
+    },
+    {
+      id: 36,
+      name: "Open World",
+      slug: "open-world",
+    },
+    {
+      id: 411,
+      name: "cooperative",
+      slug: "cooperative",
+    },
+    {
+      id: 8,
+      name: "First-Person",
+      slug: "first-person",
+    },
+    {
+      id: 32,
+      name: "Sci-fi",
+      slug: "sci-fi",
+    },
+    {
+      id: 149,
+      name: "Third Person",
+      slug: "third-person",
+    },
+    {
+      id: 45,
+      name: "2D",
+      slug: "2d",
+    },
+    {
+      id: 40845,
+      name: "Partial Controller Support",
+      slug: "partial-controller-support",
+    },
+    {
+      id: 16,
+      name: "Horror",
+      slug: "horror",
+    },
+    {
+      id: 30,
+      name: "FPS",
+      slug: "fps",
+    },
+    {
+      id: 4,
+      name: "Funny",
+      slug: "funny",
+    },
+    {
+      id: 9,
+      name: "Online Co-Op",
+      slug: "online-co-op",
+    },
+    {
+      id: 64,
+      name: "Fantasy",
+      slug: "fantasy",
+    },
+    {
+      id: 40850,
+      name: "Steam Leaderboards",
+      slug: "steam-leaderboards",
+    },
+    {
+      id: 49,
+      name: "Difficult",
+      slug: "difficult",
+    },
+    {
+      id: 193,
+      name: "Classic",
+      slug: "classic",
+    },
+    {
+      id: 26,
+      name: "Gore",
+      slug: "gore",
+    },
+    {
+      id: 37,
+      name: "Sandbox",
+      slug: "sandbox",
+    },
+    {
+      id: 189,
+      name: "Female Protagonist",
+      slug: "female-protagonist",
+    },
+    {
+      id: 1,
+      name: "Survival",
+      slug: "survival",
+    },
+    {
+      id: 6,
+      name: "Exploration",
+      slug: "exploration",
+    },
+    {
+      id: 123,
+      name: "Comedy",
+      slug: "comedy",
+    },
+    {
+      id: 15,
+      name: "Stealth",
+      slug: "stealth",
+    },
+    {
+      id: 79,
+      name: "Free to Play",
+      slug: "free-to-play",
+    },
+    {
+      id: 75,
+      name: "Local Co-Op",
+      slug: "local-co-op",
+    },
+    {
+      id: 198,
+      name: "Split Screen",
+      slug: "split-screen",
+    },
+    {
+      id: 34,
+      name: "Violent",
+      slug: "violent",
+    },
+    {
+      id: 397,
+      name: "Online multiplayer",
+      slug: "online-multiplayer",
+    },
+    {
+      id: 80,
+      name: "Tactical",
+      slug: "tactical",
+    },
+    {
+      id: 115,
+      name: "Controller",
+      slug: "controller",
+    },
+  ];
+
   useEffect(() => {
     if (localStorage.getItem("browse") === null) {
       localStorage.setItem("browse", JSON.stringify(games));
@@ -190,6 +393,22 @@ export default function Browse() {
       query += `&genres=${genresString.slice(0, -1)}`;
     }
 
+    let tagsString = "";
+
+    for (
+      let i = 1 + plats.length + genresArray.length;
+      i < 1 + plats.length + genresArray.length + tags.length;
+      i++
+    ) {
+      if (e.target[i].checked) {
+        tagsString += `${e.target[i].dataset.infoid},`;
+      }
+    }
+
+    if (tagsString.length) {
+      query += `&tags=${tagsString.slice(0, -1)}`;
+    }
+
     //console.log(genresString);
 
     console.log("searching");
@@ -209,9 +428,7 @@ export default function Browse() {
   return (
     <div className="container">
       <Head>
-        <title>
-          Browse
-        </title>
+        <title>Browse</title>
         <meta name="description" content="Browse games using filters" />
       </Head>
       <h1 className="title">Browse</h1>
@@ -228,10 +445,11 @@ export default function Browse() {
           Filters
         </h2>
         <div className={styles.filters} ref={filters} id="filters">
-          <FilterBox title='platforms' data={plats} />
-          <FilterBox title='genres' data={genresArray} />
+          <FilterBox title="platforms" data={plats} />
+          <FilterBox title="genres" data={genresArray} />
+          <FilterBox title="tags" data={tags} />
         </div>
-        <div className="top">
+        <div className={styles.buttons + ' top'}>
           <DoubleButtons />
         </div>
       </form>
@@ -243,7 +461,7 @@ export default function Browse() {
         ) : (
           <Empty />
         )}
-      </div> 
+      </div>
     </div>
   );
 }

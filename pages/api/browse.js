@@ -15,6 +15,10 @@ export default function handler(req, res) {
     fetchString += `&genres=${req.query.genres}`;
   }
 
+  if (req.query.tags) {
+    fetchString += `&tags=${req.query.tags}`;
+  }
+
   fetchString += '&page_size=15&ordering=-metacritic&search_exact=true';
 
   console.log(fetchString);
