@@ -11,6 +11,10 @@ export default function handler(req, res) {
     fetchString += `&parent_platforms=${req.query.parent_platforms}`;
   }
 
+  if (req.query.platforms) {
+    fetchString += `&platforms=${req.query.platforms}`;
+  }
+
   if (req.query.genres) {
     fetchString += `&genres=${req.query.genres}`;
   }
@@ -19,7 +23,7 @@ export default function handler(req, res) {
     fetchString += `&tags=${req.query.tags}`;
   }
 
-  fetchString += '&page_size=15&ordering=-metacritic&search_exact=true';
+  fetchString += '&page_size=30'; // &ordering=-metacritic&search_precise=true
 
   console.log(fetchString);
 
@@ -34,3 +38,9 @@ export default function handler(req, res) {
 }
 
 // https://rawg.io/api/games?key=${process.env.NEXT_PUBLIC_KEY}&search=${query}&page_size=5
+
+export const config = {
+  api: {
+    externalResolver: true,
+  },
+}

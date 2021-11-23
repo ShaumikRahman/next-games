@@ -102,8 +102,6 @@ export async function getStaticProps() {
 
   // const res = await fetch(`https://rawg.io/api/games?key=${process.env.KEY}&dates=${january ? date.getFullYear() - 1 : date.getFullYear()}-${date.getMonth() - 1}-${date.getDate()},${date.getFullYear()}-${date.getMonth()}-${date.getDate()}&ordering=-added&page_size=15`);
 
-  console.log(dates);
-
   const res = await fetch(`https://rawg.io/api/games?key=${process.env.KEY}&dates=${dates}&ordering=-added&page_size=15`);
 
   const data = await res.json();

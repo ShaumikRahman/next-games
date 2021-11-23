@@ -322,6 +322,74 @@ export default function Browse() {
     },
   ];
 
+  const consoles = [
+    {
+      id: 4,
+      name: "PC",
+      slug: "pc",
+    },
+    {
+      id: 27,
+      name: "PlayStation",
+      slug: "playstation1",
+    },
+    {
+      id: 15,
+      name: "PlayStation 2",
+      slug: "playstation2",
+    },
+    {
+      id: 16,
+      name: "PlayStation 3",
+      slug: "playstation3",
+    },
+    {
+      id: 18,
+      name: "PlayStation 4",
+      slug: "playstation4",
+    },
+    {
+      id: 187,
+      name: "PlayStation 5",
+      slug: "playstation5",
+    },
+    {
+      id: 17,
+      name: "PSP",
+      slug: "psp",
+    },
+    {
+      id: 19,
+      name: "PS Vita",
+      slug: "ps-vita",
+    },
+    {
+      id: 14,
+      name: "Xbox 360",
+      slug: "xbox360",
+    },
+    {
+      id: 1,
+      name: "Xbox One",
+      slug: "xbox-one",
+    },
+    {
+      id: 9,
+      name: "Nintendo DS",
+      slug: "nintendo-ds",
+    },
+    {
+      id: 8,
+      name: "Nintendo 3DS",
+      slug: "nintendo-3ds",
+    },
+    {
+      id: 7,
+      name: "Nintendo Switch",
+      slug: "nintendo-switch",
+    },
+  ];
+
   useEffect(() => {
     if (localStorage.getItem("browse") === null) {
       localStorage.setItem("browse", JSON.stringify(games));
@@ -355,56 +423,66 @@ export default function Browse() {
 
     console.log(e);
 
-    let query = "";
+    // query 
 
+    let query = "";
     let q = escape(
       e.target[0].value.replace(/\s\s+/g, " ").trim().replace(/\s/g, "+")
     );
-
     if (q.length) {
       query += q;
     }
 
+    // platforms
     let platforms = "";
-
     for (let i = 1; i < 1 + plats.length; i++) {
       if (e.target[i].checked) {
         platforms += `${e.target[i].dataset.infoid},`;
       }
     }
-
     if (platforms.length) {
       query += `&parent_platforms=${platforms.slice(0, -1)}`;
     }
 
-    let genresString = "";
+    // platforms
+    let consoleString = "";
+    for (let i = 1 + plats.length; i < 1 + plats.length + consoles.length; i++) {
+      if (e.target[i].checked) {
+        consoleString += `${e.target[i].dataset.infoid},`;
+      }
+    }
+    if (consoleString.length) {
+      query += `&platforms=${consoleString.slice(0, -1)}`;
+    }
 
+    // genres
+
+    let genresString = "";
     for (
-      let i = 1 + plats.length;
-      i < 1 + plats.length + genresArray.length;
+      let i = 1 + plats.length + consoles.length;
+      i < 1 + plats.length + consoles.length + genresArray.length;
       i++
     ) {
       if (e.target[i].checked) {
         genresString += `${e.target[i].dataset.infoid},`;
       }
     }
-
     if (genresString.length) {
       query += `&genres=${genresString.slice(0, -1)}`;
     }
 
-    let tagsString = "";
+    // tags
 
+    let tagsString = "";
     for (
-      let i = 1 + plats.length + genresArray.length;
-      i < 1 + plats.length + genresArray.length + tags.length;
+      let i = 1 + plats.length + consoles.length + genresArray.length;
+      i < 1 + plats.length + consoles.length + genresArray.length + tags.length;
       i++
     ) {
       if (e.target[i].checked) {
         tagsString += `${e.target[i].dataset.infoid},`;
       }
     }
-
     if (tagsString.length) {
       query += `&tags=${tagsString.slice(0, -1)}`;
     }
@@ -446,10 +524,11 @@ export default function Browse() {
         </h2>
         <div className={styles.filters} ref={filters} id="filters">
           <FilterBox title="platforms" data={plats} />
+          <FilterBox title="consoles" data={consoles} />
           <FilterBox title="genres" data={genresArray} />
           <FilterBox title="tags" data={tags} />
         </div>
-        <div className={styles.buttons + ' top'}>
+        <div className={styles.buttons + " top"}>
           <DoubleButtons />
         </div>
       </form>
