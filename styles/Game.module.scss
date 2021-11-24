@@ -3,10 +3,23 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    grid-gap: 1rem;
     gap: 1rem;
     text-align: center;
+    margin-bottom: 64px;
+    flex: 26%;
     cursor: pointer;
     transition: all 150ms ease-in-out;
+
+    @media (max-width: 48rem) {
+        flex: 34%;
+        transition: width 150ms ease-in-out;
+    }
+
+    @media (max-width: 26.5625rem) {
+        flex: 100%;
+        transition: width 150ms ease-in-out;
+    }
 }
 
 .game:hover {
