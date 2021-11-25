@@ -22,7 +22,7 @@ export default function Screenshots({ game, screenshots }) {
       <div className={styles.game}>
         <h1 className={styles.title}>{`${game.name} screenshots`}</h1>
         <div className={styles.screenshots}>
-        {screenshots.results ? screenshots.results.map(screenshot => {
+        {screenshots.results.length ? screenshots.results.map(screenshot => {
             return <img className={styles.screenshot} key={screenshot.id} src={screenshot.image} alt={game.slug} />
           }) : <Empty />}
         </div>

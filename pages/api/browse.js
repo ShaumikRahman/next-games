@@ -25,8 +25,6 @@ export default function handler(req, res) {
 
   fetchString += '&page_size=30'; // &ordering=-metacritic&search_precise=true
 
-  console.log(fetchString);
-
   fetch(fetchString)
       .then((response) => response.json())
       .then((data) => {

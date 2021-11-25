@@ -390,23 +390,17 @@ export default function Browse() {
     },
   ];
 
+  function gameSetter() {
+    setGames(JSON.parse(localStorage.getItem("browse")));
+  }
+
   useEffect(() => {
     if (localStorage.getItem("browse") === null) {
       localStorage.setItem("browse", JSON.stringify(games));
     } else {
-      setGames(JSON.parse(localStorage.getItem("browse")));
+      gameSetter();
     }
-  }, []);
-
-  // useEffect(() => {
-  //   console.log(query);
-  //   if (isInitialMount.current) {
-  //     console.log("first dodged");
-  //     isInitialMount.current = false;
-  //   } else {
-
-  //   }
-  // }, [query]);
+  }, []); // []
 
   useEffect(() => {
     if (document.getElementById(`${router.asPath.slice(8)}`) !== null) {
@@ -414,7 +408,7 @@ export default function Browse() {
         .getElementById(`${router.asPath.slice(8)}`)
         .scrollIntoView({ behavior: "smooth" });
     }
-  }, [games]);
+  }, [games, router.asPath]);
 
   const browse = (q) => `/api/browse?q=${q}`;
 
@@ -427,8 +421,9 @@ export default function Browse() {
 
     let query = "";
     let q = escape(
-      e.target[0].value.replace(/\s\s+/g, " ").trim().replace(/\s/g, "+")
+      e.target[0].value.replace(/\s\s+/g, " ").trim()
     );
+    console.log(q);
     if (q.length) {
       query += q;
     }
