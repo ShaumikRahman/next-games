@@ -77,12 +77,37 @@ a {
   transform: scale(0);
 }
 
-#filters.fade, #platforms.fade, #consoles.fade, #genres.fade, #tags.fade {
+#filters.fade {
   opacity: 1;
   max-height: 1000vh; 
   transition-property: opacity, max-height;
   transition-duration: 250ms;
   transition-timing-function: ease-in-out;
+
+  h3 {
+    max-height: unset;
+  }
+}
+
+#platforms.fade, #consoles.fade, #genres.fade, #tags.fade {
+  opacity: 1;
+  max-height: 1000vh; 
+  transition-property: opacity, max-height;
+  transition-duration: 250ms;
+  transition-timing-function: ease-in-out;
+
+  div {
+    max-height: unset;
+
+    label {
+      max-height: unset;
+    }
+
+    input {
+      max-height: unset;
+      height: unset;
+    }
+  }
 }
 
 // p.fade {
