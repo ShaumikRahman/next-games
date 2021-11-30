@@ -15,6 +15,11 @@ const Navbar = () => {
         </Link>
       </div>
       <div className={styles.link}>
+        <Link href={"/about"} passHref>
+            <h3>About</h3>
+        </Link>
+      </div>
+      <div className={styles.link}>
         <h3
           onClick={() => {
             document.getElementById("main").classList.toggle("dark");

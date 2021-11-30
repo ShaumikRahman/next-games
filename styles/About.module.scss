@@ -1,0 +1,8 @@
+.text {
+    text-align: center;
+    width: 33%;
+
+    @media (max-width: 40rem) {
+        width: 85%;
+    }
+}
