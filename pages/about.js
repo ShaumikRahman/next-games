@@ -1,10 +1,14 @@
 import styles from '../styles/About.module.scss'
+import Head from 'next/head'
 
 export default function about() {
     
     return (
         <div className="container">
-
+            <Head>
+                <title>About</title>
+                <meta name="description" content="About Next-Games" />
+            </Head>
             <h1 className="title">
                 About
             </h1>
