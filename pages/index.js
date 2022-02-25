@@ -33,10 +33,10 @@ export default function Home({ games }) {
 export async function getStaticProps() {
 
   const date = new Date;
-  let dates = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()},${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
+  let dates = `${date.getFullYear()}-${date.getMonth().toString().length === 1 ? `0${date.getMonth()}` : date.getMonth()}-${date.getDate()},${date.getFullYear()}-${(date.getMonth()+1).toString().length === 1 ? `0${date.getMonth()+1}` : date.getMonth()+1}-${date.getDate()}`;
 
-  if (date.getMonth() === 1) {
-    dates = `${date.getFullYear()-1}-${date.getMonth()}-${date.getDate()},${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
+  if (date.getMonth() === 0) {
+    dates = `${date.getFullYear()-1}-12-${date.getDate()},${date.getFullYear()}-${(date.getMonth()+1).toString().length === 1 ? `0${date.getMonth()+1}` : date.getMonth()+1}-${date.getDate()}`;
   }
 
   const res = await fetch(`https://rawg.io/api/games?key=${process.env.KEY}&dates=${dates}&ordering=-added&page_size=15`);
@@ -48,5 +48,5 @@ export async function getStaticProps() {
       games: data.results
     },
     revalidate: 300
-  }
+  } 
 }
